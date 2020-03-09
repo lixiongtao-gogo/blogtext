@@ -1,0 +1,147 @@
+ {% extends 'parent.html' %}
+{% block title %}
+    <title>文章</title>
+{% endblock %}
+{% block content %}
+    <div class="container">
+      <div class="row">
+        <!-- Latest Posts -->
+        <main class="post blog-post col-lg-8"> 
+          <div class="container">
+            <div class="post-single">
+              <div class="post-thumbnail"><img src="{{ url_for('static',filename=article_list.a_picture )}}" alt="..." class="img-fluid"></div>
+              <div class="post-details">
+                <div class="post-meta d-flex justify-content-between">
+                  <div class="category"><a href="#">Business</a><a href="#">Financial</a></div>
+                </div>
+                <h1>{{ article_list.a_title }}<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
+                <div class="post-footer d-flex align-items-center flex-column flex-sm-row"><a href="#" class="author d-flex align-items-center flex-wrap">
+
+                    </a>
+                  <div class="d-flex align-items-center flex-wrap">       
+                    <div class="date"><i class="icon-clock"></i> 2 months ago</div>
+                    <div class="views"><i class="icon-eye"></i> 500</div>
+                    <div class="comments meta-last"><i class="icon-comment"></i>12</div>
+                  </div>
+                </div>
+                <div class="post-body">
+                  <p>{{ article_list.a_content }}</p>
+                </div>
+                <div class="post-tags"><a href="#" class="tag">#Business</a><a href="#" class="tag">#Tricks</a><a href="#" class="tag">#Financial</a><a href="#" class="tag">#Economy</a></div>
+                <div class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row"><a href="{{ url_for('ac.post',a_id=article_pro.a_id) }}" class="prev-post text-left d-flex align-items-center">
+                    <div class="icon prev"><i class="fa fa-angle-left"></i></div>
+                    <div class="text"><strong class="text-primary">上一篇文章 </strong>
+                      <h6>{{ article_pro.a_title }}</h6>
+                    </div></a><a href="{{ url_for('ac.post',a_id = article_next.a_id) }}" class="next-post text-right d-flex align-items-center justify-content-end">
+                    <div class="text"><strong class="text-primary">下一篇文章 </strong>
+                      <h6>{{ article_next.a_title }}</h6>
+                    </div>
+                    <div class="icon next"><i class="fa fa-angle-right">   </i></div></a></div>
+                <div class="post-comments">
+                  <header>
+                    <h3 class="h6">评论数<span class="no-of-comments">{{ comment_num }}</span></h3>
+                  </header>
+                    {% for i in range(0,comment_num) %}
+                  <div class="comment">
+                    <div class="comment-header d-flex justify-content-between">
+                      <div class="user d-flex align-items-center">
+                        <div class="image"><img src="{{ url_for('static',filename=article_comm[i][1].c_portait) }}" alt="..." class="img-fluid rounded-circle"></div>
+                        <div class="title"><strong>{{ article_comm[i][1].c_name }}</strong><span class="date">May 2016</span></div>
+                      </div>
+                    </div>
+                    <div class="comment-body">
+                      <p>{{ article_comm[i][1].c_content }}</p>
+                    </div>
+                  </div>
+                    {% endfor %}
+                </div>
+                <div class="add-comment">
+{#                    {% for message in get_flashed_messages() %}#}
+{#                        <div class="alert alert-warning alert-dismissible" role="alert">#}
+{#                          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>#}
+{#                          <strong>Warning! {{ message }}.</strong>#}
+{#                        </div>#}
+{#                    {% endfor %}#}
+                  <header>
+                    <h3 class="h6">您的评论</h3>
+                  </header>
+                  <form action="{{ url_for('ac.post',a_id = article_list.a_id) }}" class="commenting-form" method="post">
+                    <div class="row">
+                      <div class="form-group col-md-6">
+                        <input type="text" name="username" id="username" placeholder="Name" class="form-control" value="{{ tourists }}">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <input type="email" name="username" id="useremail" placeholder="邮箱（非必须填写）" class="form-control">
+                      </div>
+                      <div class="form-group col-md-12">
+                        <textarea name="usercomment" id="usercomment" placeholder="相对作者说点啥呢" class="form-control"></textarea>
+                      </div>
+                      <div class="form-group col-md-12">
+                        <button type="submit" class="btn btn-secondary">点击提交</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+        <aside class="col-lg-4">
+          <!-- Widget [Search Bar Widget]-->
+          <div class="widget search">
+            <header>
+              <h3 class="h6">博客搜索</h3>
+            </header>
+            <form action="#" class="search-form">
+              <div class="form-group">
+                <input type="search" placeholder="你想搜索什么?">
+                <button type="submit" class="submit"><i class="icon-search"></i></button>
+              </div>
+            </form>
+          </div>
+          <!-- Widget [Latest Posts Widget]        -->
+          <div class="widget latest-posts">
+            <header>
+              <h3 class="h6">最近文章</h3>
+            </header>
+            <div class="blog-posts">
+                {% for article in three_articles %}
+                    <a href="{{ url_for('ac.post',a_id = article.a_id) }}">
+                <div class="item d-flex align-items-center">
+                  <div class="image"><img src="{{ url_for('static',filename=article.a_picture) }}" alt="..." class="img-fluid"></div>
+                  <div class="title"><strong>{{ article.a_title }}</strong>
+                    <div class="d-flex align-items-center">
+                      <div class="views"><i class="icon-eye"></i> 500</div>
+                      <div class="comments"><i class="icon-comment"></i>12</div>
+                    </div>
+                  </div>
+                </div></a>
+                {% endfor %}
+            </div>
+          </div>
+          <!-- Widget [Categories Widget]-->
+          <div class="widget categories">
+            <header>
+              <h3 class="h6">Categories</h3>
+            </header>
+              {% for cate in categories %}
+            <div class="item d-flex justify-content-between"><a href="{{ url_for('ac.blog',c_id = cate.c_id) }}">{{ cate.c_name }}</a><span>12</span></div>
+              {% endfor %}
+          </div>
+          <!-- Widget [Tags Cloud Widget]-->
+          <div class="widget tags">       
+            <header>
+              <h3 class="h6">Tags</h3>
+            </header>
+            <ul class="list-inline">
+              <li class="list-inline-item"><a href="#" class="tag">#Business</a></li>
+              <li class="list-inline-item"><a href="#" class="tag">#Technology</a></li>
+              <li class="list-inline-item"><a href="#" class="tag">#Fashion</a></li>
+              <li class="list-inline-item"><a href="#" class="tag">#Sports</a></li>
+              <li class="list-inline-item"><a href="#" class="tag">#Economy</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends 'parent.html' %}
+{% block scripts %}
+    {{ moment.include_jquery() }}
+    {{ moment.include_moment() }}
+    {{moment.locale('zh-CN')}}
+{% endblock %}
+{#{{ moment(article_cate[i][0].a_create_time).fromNow(refresh=True) }}#}
+
+{% block title %}
+    <title>博客</title>
+{% endblock %}
+{% block content %}
+    <div class="container">
+      <div class="row">
+        <!-- Latest Posts -->
+        <main class="posts-listing col-lg-8"> 
+          <div class="container">
+            <div class="row">
+              <!-- post -->
+                {% for article in pagination.items %}
+                    <div class="post col-xl-6">
+                <div class="post-thumbnail"><a href="{{ url_for('ac.post',a_id = article[0].a_id ) }}"><img src="{{ url_for('static',filename=article[0].a_picture)}}" alt="..." class="img-fluid"></a></div>
+                <div class="post-details">
+                  <div class="post-meta d-flex justify-content-between">
+                    <div class="date meta-last">{{ article[0].a_create_time }}</div>
+                    <div class="category"><a href="#">Business</a></div>
+                  </div><a href="{{ url_for('ac.post',a_id = article[0].a_id ) }}">
+                    <h3 class="h4">{{ article[0].a_title }}</h3></a>
+                  <p class="text-muted">{{ article[0].a_content }}</p>
+                  <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                      </a>
+                    <div class="date"><i class="icon-clock"></i>2个月内</div>
+                    <div class="comments meta-last"><i class="icon-comment"></i>12</div>
+                  </footer>
+                </div>
+              </div>
+                {% endfor %}
+            </div>
+            <!-- Pagination -->
+            <nav aria-label="Page navigation example">
+              <ul class="pagination pagination-template d-flex justify-content-center">
+                <li class="page-item"><a href="#" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
+                  {% for current in pagination.iter_pages() %}
+                <li class="page-item"><a href="{{ url_for('ac.blog',c_id=c_id,page=current) }}" class="page-link active">{{ current }}</a></li>
+                  {% endfor %}
+{#                <li class="page-item"><a href="#" class="page-link">2</a></li>#}
+{#                <li class="page-item"><a href="#" class="page-link">3</a></li>#}
+                <li class="page-item"><a href="#" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+              </ul>
+            </nav>
+          </div>
+        </main>
+        <aside class="col-lg-4">
+          <!-- Widget [Search Bar Widget]-->
+          <div class="widget search">
+            <header>
+              <h3 class="h6">搜索博客</h3>
+            </header>
+            <form action="#" class="search-form">
+              <div class="form-group">
+                <input type="search" placeholder="你想查找什么?">
+                <button type="submit" class="submit"><i class="icon-search"></i></button>
+              </div>
+            </form>
+          </div>
+          <!-- Widget [Latest Posts Widget]        -->
+          <div class="widget latest-posts">
+            <header>
+              <h3 class="h6">最近文章</h3>
+            </header>
+            <div class="blog-posts">
+                {% for article in three_article %}
+                    <a href="{{ url_for('ac.post',a_id = article.a_id) }}">
+                <div class="item d-flex align-items-center">
+                  <div class="image"><img src="{{ url_for('static',filename=article.a_picture) }}" alt="..." class="img-fluid"></div>
+                  <div class="title"><strong>{{ article.a_title }}</strong>
+                    <div class="d-flex align-items-center">
+                      <div class="views"><i class="icon-eye"></i> 500</div>
+                      <div class="comments"><i class="icon-comment"></i>12</div>
+                    </div>
+                  </div>
+                </div>
+                 {% endfor %}
+            </a></div>
+          </div>
+          <!-- Widget [Categories Widget]-->
+          <div class="widget categories">
+            <header>
+              <h3 class="h6">文章分类</h3>
+            </header>
+              {% for cate in categories %}
+                    <div class="item d-flex justify-content-between"><a href="{{ url_for('ac.blog',c_id = cate.c_id) }}">{{ cate.c_name }}</a><span>12</span></div>
+              {% endfor %}
+          </div>
+          <!-- Widget [Tags Cloud Widget]-->
+          <div class="widget tags">       
+            <header>
+              <h3 class="h6">Tags</h3>
+            </header>
+            <ul class="list-inline">
+              <li class="list-inline-item"><a href="#" class="tag">#Business</a></li>
+              <li class="list-inline-item"><a href="#" class="tag">#Technology</a></li>
+              <li class="list-inline-item"><a href="#" class="tag">#Fashion</a></li>
+              <li class="list-inline-item"><a href="#" class="tag">#Sports</a></li>
+              <li class="list-inline-item"><a href="#" class="tag">#Economy</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+{% endblock %}

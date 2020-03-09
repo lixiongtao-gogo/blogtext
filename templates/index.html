@@ -1,0 +1,170 @@
+ {% extends 'parent.html' %}
+{% block title %}
+    <title>首页</title>
+{% endblock %}
+{% block content %}
+    <!-- Hero Section-->
+    <section style="background: url(../static/img/hero.jpg); background-size: cover; background-position: center center" class="hero">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7">
+            <h1>欢迎来到我的世界</h1><a href="#" class="hero-link">Discover More</a>
+          </div>
+        </div><a href=".intro" class="continue link-scroll"><i class="fa fa-long-arrow-down"></i> Scroll Down</a>
+      </div>
+    </section>
+    <!-- Intro Section-->
+    <section class="intro">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <h2 class="h3">大明王朝</h2>
+            <p class="text-big">中国历史上一个由汉族建立的王朝，初期建都南京，明成祖时期定都北京。传十六帝，共计276年</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="featured-posts no-padding-top">
+      <div class="container">
+        <!-- Post-->
+        <div class="row d-flex align-items-stretch">
+          <div class="text col-lg-7">
+            <div class="text-inner d-flex align-items-center">
+              <div class="content">
+                <header class="post-header">
+                  <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="{{ url_for('ac.post',a_id=articles[0].a_id) }}">
+                    <h2 class="h4">{{ articles[0].a_title }}</h2></a>
+                </header>
+                <p>{{ articles[0].a_content }}</p>
+                <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                    <div class="avatar"><img src="{{ url_for('static',filename=users[6].u_portait) }}" alt="..." class="img-fluid"></div>
+                    <div class="title"><span>{{ users[6].u_username}}</span></div></a>
+                  <div class="date"><i class="icon-clock"></i> 2 months ago</div>
+                  <div class="comments"><i class="icon-comment"></i>12</div>
+                </footer>
+              </div>
+            </div>
+          </div>
+          <div class="image col-lg-5"><img src="{{ url_for('static',filename=articles[0].a_picture) }}" alt="..."></div>
+        </div>
+        <!-- Post        -->
+        <div class="row d-flex align-items-stretch">
+          <div class="image col-lg-5"><img src="{{ url_for('static',filename=articles[1].a_picture) }}" alt="..."></div>
+          <div class="text col-lg-7">
+            <div class="text-inner d-flex align-items-center">
+              <div class="content">
+                <header class="post-header">
+                  <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="{{ url_for('ac.post',a_id=articles[1].a_id) }}">
+                    <h2 class="h4">{{ articles[1].a_title }}</h2></a>
+                </header>
+                <p>{{ articles[1].a_content }}</p>
+                <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                    <div class="avatar"><img src="{{ url_for('static',filename=users[6].u_portait) }}" alt="..." class="img-fluid"></div>
+                    <div class="title"><span>{{ users[6].u_username }}</span></div></a>
+                  <div class="date"><i class="icon-clock"></i> 2 months ago</div>
+                  <div class="comments"><i class="icon-comment"></i>12</div>
+                </footer>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Post                            -->
+        <div class="row d-flex align-items-stretch">
+          <div class="text col-lg-7">
+            <div class="text-inner d-flex align-items-center">
+              <div class="content">
+                <header class="post-header">
+                  <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="{{ url_for('ac.post',a_id=articles[2].a_id) }}">
+                    <h2 class="h4">{{ articles[2].a_title }}</h2></a>
+                </header>
+                <p>{{ articles[2].a_content }}</p>
+                <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                    <div class="avatar"><img src="{{ url_for('static',filename=users[6].u_portait) }}" alt="..." class="img-fluid"></div>
+                    <div class="title"><span>{{ users[6].u_username }}</span></div></a>
+                  <div class="date"><i class="icon-clock"></i> 2 months ago</div>
+                  <div class="comments"><i class="icon-comment"></i>12</div>
+                </footer>
+              </div>
+            </div>
+          </div>
+          <div class="image col-lg-5"><img src="{{ url_for('static',filename=articles[2].a_picture) }}" alt="..."></div>
+        </div>
+      </div>
+    </section>
+    <div class="tlinks">Collect from <a href="http://www.cssmoban.com/"  title="网站模板">网站模板</a></div>
+    <!-- Divider Section-->
+    <section style="background: url(../static/img/divider-bg.jpg); background-size: cover; background-position: center bottom" class="divider">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-7">
+            <h2>据《明实录》所载人口峰值为7185万,也有学者指出逾亿,也有晚明人口近两亿的说法</h2><a href="#" class="hero-link">更多...</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Latest Posts -->
+    <section class="latest-posts"> 
+      <div class="container">
+        <header> 
+          <h2>近期三篇文章</h2>
+          <p class="text-big">想了解更多内容，请查看博客文章</p>
+        </header>
+        <div class="row">
+            {% for article in three_article %}
+          <div class="post col-md-4">
+            <div class="post-thumbnail"><a href="post.html"><img src="{{ url_for('static',filename=article.a_picture) }}" alt="..." class="img-fluid"></a></div>
+            <div class="post-details">
+              <div class="post-meta d-flex justify-content-between">
+                <div class="date">20 May | 2016</div>
+                <div class="category"><a href="#">Business</a></div>
+              </div><a href="{{ url_for('ac.post',a_id = article.a_id) }}">
+                <h3 class="h4">{{ article.a_title }}</h3></a>
+            </div>
+          </div>
+            {% endfor %}
+        </div>
+      </div>
+    </section>
+    <!-- Newsletter Section-->
+    <section class="newsletter no-padding-top">    
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h2>订阅博客</h2>
+            <p class="text-big">想了解更多内容请发送邮箱，我们将定期发送博客内容发送至您的邮箱</p>
+          </div>
+          <div class="col-md-8">
+            <div class="form-holder">
+              <form action="#">
+                <div class="form-group">
+                  <input type="email" name="email" id="email" placeholder="请输入您的邮箱地址">
+                  <button type="submit" class="submit">发送</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Gallery Section-->
+    <section class="gallery no-padding">    
+      <div class="row">
+        <div class="mix col-lg-3 col-md-3 col-sm-6">
+          <div class="item"><a href="../static/img/gallery-1.jpg" data-fancybox="gallery" class="image"><img src="../static/img/gallery-1.jpg" alt="..." class="img-fluid">
+              <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+        </div>
+        <div class="mix col-lg-3 col-md-3 col-sm-6">
+          <div class="item"><a href="../static/img/gallery-2.jpg" data-fancybox="gallery" class="image"><img src="../static/img/gallery-2.jpg" alt="..." class="img-fluid">
+              <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+        </div>
+        <div class="mix col-lg-3 col-md-3 col-sm-6">
+          <div class="item"><a href="../static/img/gallery-3.jpg" data-fancybox="gallery" class="image"><img src="../static/img/gallery-3.jpg" alt="..." class="img-fluid">
+              <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+        </div>
+        <div class="mix col-lg-3 col-md-3 col-sm-6">
+          <div class="item"><a href="../static/img/gallery-4.jpg" data-fancybox="gallery" class="image"><img src="../static/img/gallery-4.jpg" alt="..." class="img-fluid">
+              <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+        </div>
+      </div>
+    </section>
+ {% endblock %}
