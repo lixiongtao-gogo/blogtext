@@ -7,8 +7,8 @@ import random
 from aliyunsdkcore.client import AcsClient
 from aliyunsdkcore.request import CommonRequest
 
-ACCESS_KEY_ID = "LTAI4Fjj55R3UsiMQnvzGFq6"  #用户AccessKey  需要根据自己的账户修改
-ACCESS_KEY_SECRET = "5iReC6loMzTtk0xvo9koSoeD6dNnnu"  #Access Key Secret  需要根据自己的账户修改
+ACCESS_KEY_ID = ""  #用户AccessKey  需要根据自己的账户修改
+ACCESS_KEY_SECRET = ""  #Access Key Secret  需要根据自己的账户修改
 
 class SMS:
     def __init__(self,signName,templateCode):
